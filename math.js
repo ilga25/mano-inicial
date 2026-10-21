@@ -56,7 +56,7 @@ function choose(n,k){if(k<0||k>n)return 0n;k=Math.min(k,n-k);let v=1n;for(let i=
 function hand(d){
  int(d.deck,2,300,'Cartas del mazo');int(d.copies,0,d.deck,'Copias útiles');int(d.hand,0,d.deck,'Mano inicial');int(d.draws,0,d.deck-d.hand,'Robos extra');int(d.need,0,d.copies,'Copias mínimas');
  const n=d.hand+d.draws,total=choose(d.deck,n),rows=[];let good=0n;for(let k=0;k<=Math.min(n,d.copies);k++){let v=choose(d.copies,k)*choose(d.deck-d.copies,n-k);if(k>=d.need)good+=v;rows.push([k,f(Number(v)/Number(total)*100,4)+' %']);}
- return {metrics:[['Al menos '+d.need+' copias',f(Number(good)/Number(total)*100,4)+' %'],['Cartas vistas',n],['Copias esperadas',f(n*d.copies/d.deck,3)]],headers:['Copias útiles vistas','Probabilidad'],rows,note:'Muestreo uniforme sin reemplazo. Agrupa mano inicial y robos adicionales; no modela mulligans, cartas buscadoras ni decisiones de juego. Las copias útiles deben pertenecer a una única categoría sin doble conteo.',good,total,n};
+ return {metrics:[['Al menos '+d.need+(d.need===1?' copia':' copias'),f(Number(good)/Number(total)*100,4)+' %'],['Cartas vistas',n],['Copias esperadas',f(n*d.copies/d.deck,3)]],headers:['Copias útiles vistas','Probabilidad'],rows,note:'Muestreo uniforme sin reemplazo. Agrupa mano inicial y robos adicionales; no modela mulligans, cartas buscadoras ni decisiones de juego. Las copias útiles deben pertenecer a una única categoría sin doble conteo.',good,total,n};
 }
 function chunks(d){
  for(const k of ['x1','x2','z1','z2'])int(d[k],-30000000,30000000,'Coordenadas');
